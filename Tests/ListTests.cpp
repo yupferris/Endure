@@ -73,3 +73,14 @@ TEST_CASE("Cons to single element int list", "[List]")
 	REQUIRE(!l2->Tail->Tail);
 	REQUIRE(l2->Tail->Count == 1);
 }
+
+TEST_CASE("Simple int list cons stress test", "[List")
+{
+	auto l = shared_ptr<_List<int>>(new _List<int>(0));
+	for (int i = 1; i < 10000; i++)
+		l = _List<int>::Cons(i, l);
+
+	REQUIRE(l->Head == 9999);
+	REQUIRE(l->Tail->Count == 9999);
+	REQUIRE(l->Count == 10000);
+}
