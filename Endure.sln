@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Endure", "Endure.vcxproj", "{F3DB34CF-596E-41F6-B150-0D751CC87187}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{9514C10E-41A8-4047-BF0A-0B96DE379032}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Tests", "Tests\Tests.vcxproj", "{AA56802B-CACA-4F3C-B8FD-549909C0111A}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F3DB34CF-596E-41F6-B150-0D751CC87187}.Debug|Win32.ActiveCfg = Debug|Win32
+		{F3DB34CF-596E-41F6-B150-0D751CC87187}.Debug|Win32.Build.0 = Debug|Win32
+		{F3DB34CF-596E-41F6-B150-0D751CC87187}.Release|Win32.ActiveCfg = Release|Win32
+		{F3DB34CF-596E-41F6-B150-0D751CC87187}.Release|Win32.Build.0 = Release|Win32
+		{AA56802B-CACA-4F3C-B8FD-549909C0111A}.Debug|Win32.ActiveCfg = Debug|Win32
+		{AA56802B-CACA-4F3C-B8FD-549909C0111A}.Debug|Win32.Build.0 = Debug|Win32
+		{AA56802B-CACA-4F3C-B8FD-549909C0111A}.Release|Win32.ActiveCfg = Release|Win32
+		{AA56802B-CACA-4F3C-B8FD-549909C0111A}.Release|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{AA56802B-CACA-4F3C-B8FD-549909C0111A} = {9514C10E-41A8-4047-BF0A-0B96DE379032}
+	EndGlobalSection
+EndGlobal
