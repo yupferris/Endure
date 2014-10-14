@@ -39,5 +39,9 @@ obj/
 Release/
 TestResults/
 
+# Built files
+/lib/Endure.lib
+/lib/EndureD.lib
+
 # Misc
 buildlog.txt
