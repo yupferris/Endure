@@ -51,7 +51,7 @@ namespace Endure
 		}
 
 		_Cons(T head, std::shared_ptr<_List<T>> tail)
-			: head(head), tail(tail), count(tail.get()->Count() + 1)
+			: head(head), tail(tail), count(tail->Count() + 1)
 		{
 		}
 
