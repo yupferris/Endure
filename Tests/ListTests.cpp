@@ -6,7 +6,7 @@ using namespace std;
 
 TEST_CASE("Create single element int list", "[List]")
 {
-	auto l = shared_ptr<_List<int>>(new _List<int>(6));
+	auto l = List<int>(new _List<int>(6));
 
 	REQUIRE(l->Head == 6);
 	REQUIRE(!l->Tail);
@@ -15,14 +15,14 @@ TEST_CASE("Create single element int list", "[List]")
 
 TEST_CASE("Create two element int list", "[List]")
 {
-	auto tail = shared_ptr<_List<int>>(new _List<int>(29));
-	auto l = shared_ptr<_List<int>>(new _List<int>(45, tail));
+	auto tail = List<int>(new _List<int>(29));
+	auto l = List<int>(new _List<int>(45, tail));
 
 	REQUIRE(l->Head == 45);
 	REQUIRE(l->Tail == tail);
 	REQUIRE(l->Count == 2);
 
-	shared_ptr<_List<int>> t = l->Tail;
+	List<int> t = l->Tail;
 	REQUIRE(t->Head == 29);
 	REQUIRE(!t->Tail);
 	REQUIRE(t->Count == 1);
@@ -30,7 +30,7 @@ TEST_CASE("Create two element int list", "[List]")
 
 TEST_CASE("Cons to single element int list", "[List]")
 {
-	auto l = shared_ptr<_List<int>>(new _List<int>(2000));
+	auto l = List<int>(new _List<int>(2000));
 	auto l2 = _List<int>::Cons(1984, l);
 
 	REQUIRE(l2->Head == 1984);
@@ -44,7 +44,7 @@ TEST_CASE("Cons to single element int list", "[List]")
 
 TEST_CASE("Simple int list cons stress test", "[List")
 {
-	auto l = shared_ptr<_List<int>>(new _List<int>(0));
+	auto l = List<int>(new _List<int>(0));
 	for (int i = 1; i < 10000; i++)
 		l = _List<int>::Cons(i, l);
 

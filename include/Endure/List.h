@@ -29,8 +29,7 @@ namespace Endure
 		}
 	};
 
-	// TODO: Upgrade VS and use this everywhere
-	//template <typename T> using List = shared_ptr<_List<T>>;
+	template <typename T> using List = std::shared_ptr<_List<T>>;
 }
 
 #endif
