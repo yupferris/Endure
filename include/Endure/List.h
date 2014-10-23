@@ -11,7 +11,7 @@ namespace Endure
 	public:
 		static std::shared_ptr<_List<T>> Cons(T item, std::shared_ptr<_List<T>> list)
 		{
-			return std::shared_ptr<_List<T>>(new _List<T>(item, list));
+			return std::make_shared<_List<T>>(_List<T>(item, list));
 		}
 
 		const T Head;
