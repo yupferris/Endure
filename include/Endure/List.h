@@ -92,7 +92,7 @@ namespace Endure
 		return List<T>(new _Cons<T>(head));
 	}
 
-	template <typename T> List<T> Conj(T head, List<T> tail)
+	template <typename T> List<T> Conj(List<T> tail, T head)
 	{
 		return List<T>(new _Cons<T>(head, tail));
 	}

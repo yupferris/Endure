@@ -24,7 +24,7 @@ TEST_CASE("Create single element int list", "[List]")
 TEST_CASE("Create two element int list", "[List]")
 {
 	auto tail = CreateList(29);
-	auto l = Conj(45, tail);
+	auto l = Conj(tail, 45);
 
 	REQUIRE(l->Head() == 45);
 	REQUIRE(l->Tail() == tail);
@@ -39,7 +39,7 @@ TEST_CASE("Create two element int list", "[List]")
 TEST_CASE("Cons to single element int list", "[List]")
 {
 	auto l = CreateList(2000);
-	auto l2 = Conj(1984, l);
+	auto l2 = Conj(l, 1984);
 
 	REQUIRE(l2->Head() == 1984);
 	REQUIRE(l2->Tail() == l);
@@ -54,7 +54,7 @@ TEST_CASE("Simple int list cons stress test", "[List]")
 {
 	auto l = CreateList(0);
 	for (int i = 1; i < 10000; i++)
-		l = Conj(i, l);
+		l = Conj(l, i);
 
 	REQUIRE(l->Head() == 9999);
 	REQUIRE(l->Tail()->Count() == 9999);
