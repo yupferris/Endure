@@ -7,5 +7,5 @@ TEST_CASE("Create empty int vector", "[Vector]")
 {
 	auto v = CreateVector<int>();
 
-	REQUIRE(!v->Count);
+	REQUIRE(!v->Count());
 }

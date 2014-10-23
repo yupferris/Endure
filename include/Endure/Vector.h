@@ -9,12 +9,18 @@ namespace Endure
 	template <typename T> class _Vector
 	{
 	public:
-		const int Count;
-
 		_Vector()
-			: Count(0)
+			: count(0)
 		{
 		}
+
+		int Count() const
+		{
+			return count;
+		}
+
+	private:
+		const int count;
 	};
 
 	template <typename T> using Vector = std::shared_ptr<_Vector<T>>;
