@@ -26,9 +26,14 @@ namespace Endure
 
 	template <typename T> using List = std::shared_ptr<_List<T>>;
 
-	template <typename T> List<T> Cons(T head)
+	template <typename T> List<T> CreateList(T head)
 	{
 		return std::make_shared<_List<T>>(_List<T>(head));
+	}
+
+	template <typename T> List<T> Cons(T head)
+	{
+		return CreateList(head);
 	}
 
 	template <typename T> List<T> Cons(T head, List<T> tail)

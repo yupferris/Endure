@@ -14,7 +14,7 @@ TEST_CASE("Create single element int list", "[List]")
 
 TEST_CASE("Create two element int list", "[List]")
 {
-	auto tail = Cons(29);
+	auto tail = CreateList(29);
 	auto l = Cons(45, tail);
 
 	REQUIRE(l->Head == 45);
@@ -43,7 +43,7 @@ TEST_CASE("Cons to single element int list", "[List]")
 
 TEST_CASE("Simple int list cons stress test", "[List")
 {
-	auto l = Cons(0);
+	auto l = CreateList(0);
 	for (int i = 1; i < 10000; i++)
 		l = Cons(i, l);
 

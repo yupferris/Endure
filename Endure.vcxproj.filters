@@ -10,6 +10,9 @@
     <ClInclude Include="include\Endure\List.h">
       <Filter>Endure</Filter>
     </ClInclude>
+    <ClInclude Include="include\Endure\Vector.h">
+      <Filter>Endure</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Endure.cpp" />

@@ -84,6 +84,7 @@
   <ItemGroup>
     <ClCompile Include="ListTests.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="VectorTests.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
