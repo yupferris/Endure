@@ -6,7 +6,7 @@ using namespace std;
 
 TEST_CASE("Create single element int list", "[List]")
 {
-	auto l = make_shared<_List<int>>(_List<int>(6));
+	auto l = Cons(6);
 
 	REQUIRE(l->Head == 6);
 	REQUIRE(!l->Tail);
@@ -15,8 +15,8 @@ TEST_CASE("Create single element int list", "[List]")
 
 TEST_CASE("Create two element int list", "[List]")
 {
-	auto tail = make_shared<_List<int>>(_List<int>(29));
-	auto l = make_shared<_List<int>>(_List<int>(45, tail));
+	auto tail = Cons(29);
+	auto l = Cons(45, tail);
 
 	REQUIRE(l->Head == 45);
 	REQUIRE(l->Tail == tail);
@@ -30,8 +30,8 @@ TEST_CASE("Create two element int list", "[List]")
 
 TEST_CASE("Cons to single element int list", "[List]")
 {
-	auto l = make_shared<_List<int>>(_List<int>(2000));
-	auto l2 = _List<int>::Cons(1984, l);
+	auto l = Cons(2000);
+	auto l2 = Cons(1984, l);
 
 	REQUIRE(l2->Head == 1984);
 	REQUIRE(l2->Tail == l);
@@ -44,9 +44,9 @@ TEST_CASE("Cons to single element int list", "[List]")
 
 TEST_CASE("Simple int list cons stress test", "[List")
 {
-	auto l = make_shared<_List<int>>(_List<int>(0));
+	auto l = Cons(0);
 	for (int i = 1; i < 10000; i++)
-		l = _List<int>::Cons(i, l);
+		l = Cons(i, l);
 
 	REQUIRE(l->Head == 9999);
 	REQUIRE(l->Tail->Count == 9999);
