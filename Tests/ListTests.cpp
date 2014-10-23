@@ -2,7 +2,6 @@
 #include "Catch/single_include/catch.hpp"
 
 using namespace Endure;
-using namespace std;
 
 TEST_CASE("Create single element int list", "[List]")
 {
