@@ -20,14 +20,18 @@ namespace Endure
 		{
 		}
 
-		_Vector(std::shared_ptr<_Node<T>> root)
-			: root(root), count(1)
-		{
-		}
-
 		int Count() const
 		{
 			return count;
+		}
+
+		std::shared_ptr<_Vector<T>> Conj(T item)
+		{
+			auto n = new _Node<T>();
+			for (int i = 0; i < count; i++)
+				n->Elements[i] = root->Elements[i];
+			n->Elements[count] = item;
+			return std::shared_ptr<_Vector<T>>(new _Vector<T>(std::shared_ptr<_Node<T>>(n), count + 1));
 		}
 
 		T Get(int key)
@@ -36,6 +40,16 @@ namespace Endure
 		}
 
 	private:
+		_Vector(std::shared_ptr<_Node<T>> root)
+			: root(root), count(1)
+		{
+		}
+
+		_Vector(std::shared_ptr<_Node<T>> root, int count)
+			: root(root), count(count)
+		{
+		}
+
 		const std::shared_ptr<_Node<T>> root;
 		const int count;
 	};
@@ -44,14 +58,12 @@ namespace Endure
 
 	template <typename T> Vector<T> CreateVector()
 	{
-		return std::make_shared<_Vector<T>>(_Vector<T>());
+		return std::shared_ptr<_Vector<T>>(new _Vector<T>());
 	}
 
 	template <typename T> Vector<T> Conj(Vector<T> vector, T item)
 	{
-		auto n = std::shared_ptr<_Node<T>>(new _Node<T>());
-		n->Elements[0] = item;
-		return Vector<T>(new _Vector<T>(n));
+		return vector->Conj(item);
 	}
 
 	template <typename T> T Get(Vector<T> vector, int key)
