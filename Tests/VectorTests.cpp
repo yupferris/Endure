@@ -30,6 +30,6 @@ TEST_CASE("Append single item to single int vector", "[Vector]")
 	REQUIRE(v2->Count() == 1);
 	REQUIRE(Get(v2, 0) == 26);
 	REQUIRE(v3->Count() == 2);
-	REQUIRE(Get(v2, 0) == 26);
+	REQUIRE(Get(v3, 0) == 26);
 	REQUIRE(Get(v3, 1) == -28);
 }
