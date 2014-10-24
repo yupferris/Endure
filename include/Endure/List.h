@@ -6,7 +6,6 @@
 
 namespace Endure
 {
-	template <typename T> class _List;
 	template <typename T> class _List
 	{
 	public:

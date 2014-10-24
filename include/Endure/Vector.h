@@ -11,7 +11,6 @@ namespace Endure
 		T Elements[32];
 	};
 
-	template <typename T> class _Vector;
 	template <typename T> class _Vector
 	{
 	public:

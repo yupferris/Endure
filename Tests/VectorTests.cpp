@@ -33,3 +33,14 @@ TEST_CASE("Append single item to single int vector", "[Vector]")
 	REQUIRE(Get(v3, 0) == 26);
 	REQUIRE(Get(v3, 1) == -28);
 }
+
+TEST_CASE("Append 32 items to empty int vector", "[Vector]")
+{
+	auto v = CreateVector<int>();
+	for (int i = 0; i < 32; i++)
+		v = v->Conj(i);
+
+	REQUIRE(v->Count() == 32);
+	for (int i = 0; i < 32; i++)
+		REQUIRE(v->Get(i) == i);
+}
