@@ -44,3 +44,52 @@ TEST_CASE("Append 32 items to empty int vector", "[Vector]")
 	for (int i = 0; i < 32; i++)
 		REQUIRE(v->Get(i) == i);
 }
+
+TEST_CASE("Create empty int vector range checks", "[Vector]")
+{
+	auto v = CreateVector<int>();
+
+	REQUIRE_THROWS_AS(v->Get(-1), std::out_of_range);
+	REQUIRE_THROWS_AS(v->Get(0), std::out_of_range);
+	REQUIRE_THROWS_AS(v->Get(1), std::out_of_range);
+	REQUIRE_THROWS_AS(v->Get(1220), std::out_of_range);
+}
+
+TEST_CASE("Single item int vector range checks", "[Vector]")
+{
+	auto v = CreateVector<int>();
+	auto v2 = Conj(v, 25);
+
+	REQUIRE_THROWS_AS(v->Get(-1), std::out_of_range);
+	REQUIRE_THROWS_AS(v->Get(0), std::out_of_range);
+	REQUIRE_THROWS_AS(v->Get(1), std::out_of_range);
+	REQUIRE_THROWS_AS(v->Get(1220), std::out_of_range);
+
+	REQUIRE_THROWS_AS(v2->Get(-1), std::out_of_range);
+	REQUIRE_THROWS_AS(v2->Get(1), std::out_of_range);
+	REQUIRE_THROWS_AS(v2->Get(2), std::out_of_range);
+	REQUIRE_THROWS_AS(v2->Get(1220), std::out_of_range);
+}
+
+TEST_CASE("32 item int vector range checks", "[Vector]")
+{
+	auto v = CreateVector<int>();
+	for (int i = 0; i < 32; i++)
+		v = v->Conj(i);
+
+	REQUIRE_THROWS_AS(v->Get(-1233), std::out_of_range);
+	REQUIRE_THROWS_AS(v->Get(-1), std::out_of_range);
+	REQUIRE_THROWS_AS(v->Get(32), std::out_of_range);
+	REQUIRE_THROWS_AS(v->Get(333), std::out_of_range);
+}
+
+TEST_CASE("Append 64 items to empty int vector", "[Vector]")
+{
+	auto v = CreateVector<int>();
+	for (int i = 0; i < 64; i++)
+		v = v->Conj(i);
+
+	REQUIRE(v->Count() == 64);
+	for (int i = 0; i < 64; i++)
+		REQUIRE(v->Get(i) == i);
+}

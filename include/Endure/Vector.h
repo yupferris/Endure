@@ -1,6 +1,7 @@
 #ifndef __ENDURE_VECTOR_H__
 #define __ENDURE_VECTOR_H__
 
+#include <exception>
 #include <memory>
 
 namespace Endure
@@ -35,6 +36,9 @@ namespace Endure
 
 		T Get(int key)
 		{
+			if (key < 0 || key >= count)
+				throw std::out_of_range("Key was out of bounds");
+
 			return root->Elements[key];
 		}
 
