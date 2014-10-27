@@ -38,7 +38,7 @@ namespace Endure
 	{
 	public:
 		_Vector()
-			: count(0), shift(5), root(new _Node<std::shared_ptr<void>>()), tail(new _Node<T>())
+			: count(0), shift(5), root(new _Node<std::shared_ptr<void>>(32)), tail(new _Node<T>())
 		{
 		}
 
