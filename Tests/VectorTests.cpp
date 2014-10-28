@@ -153,3 +153,17 @@ TEST_CASE("Assoc int vector range checks", "[Vector]")
 	REQUIRE_THROWS_AS(v->Assoc(12, 1337), std::out_of_range);
 	REQUIRE_THROWS_AS(v->Assoc(1220, 1337), std::out_of_range);
 }
+
+TEST_CASE("Pop empty int vector", "[Vector]")
+{
+	REQUIRE_THROWS_AS(CreateVector<int>()->Pop(), std::logic_error);
+}
+
+TEST_CASE("Pop single item int vector", "[Vector]")
+{
+	auto v = CreateVector<int>();
+	v = Conj(v, 10);
+	v = Pop(v);
+
+	REQUIRE(!v->Count());
+}

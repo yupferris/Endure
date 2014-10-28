@@ -103,6 +103,17 @@ namespace Endure
 			return std::shared_ptr<_Vector<T>>(new _Vector(count, shift, AssocAux(shift, root, i, value), tail));
 		}
 
+		std::shared_ptr<_Vector<T>> Pop()
+		{
+			if (!count)
+				throw std::logic_error("Cannot pop empty vector");
+
+			if (count == 1)
+				return std::shared_ptr<_Vector<T>>(new _Vector<T>());
+
+
+		}
+
 		T Get(int i) const
 		{
 			auto node = ArrayFor(i);
@@ -217,6 +228,11 @@ namespace Endure
 	template <typename T> Vector<T> Assoc(Vector<T> vector, int i, T value)
 	{
 		return vector->Assoc(i, value);
+	}
+
+	template <typename T> Vector<T> Pop(Vector<T> vector)
+	{
+		return vector->Pop();
 	}
 
 	template <typename T> T Get(Vector<T> vector, int key)
