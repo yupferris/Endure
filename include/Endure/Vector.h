@@ -18,7 +18,7 @@ namespace Endure
 		}
 
 		_Node(int count)
-			: Count(count), Elements(new T[count])
+			: Count(count), Elements(count > 0 ? new T[count] : nullptr)
 		{
 		}
 

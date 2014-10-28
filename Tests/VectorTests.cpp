@@ -132,3 +132,12 @@ TEST_CASE("Change 16 items in small (tail-only) int vector", "[Vector]")
 	for (int i = 0; i < 32; i++)
 		REQUIRE(v->Get(i) == (i < 16 ? 16 - i : i));
 }
+
+TEST_CASE("Assoc to empty int vector", "[Vector]")
+{
+	auto v = CreateVector<int>();
+	v = Assoc(v, 0, 26);
+
+	REQUIRE(v->Count() == 1);
+	REQUIRE(v->Get(0) == 26);
+}
