@@ -15,9 +15,6 @@
     <ClInclude Include="include\Endure\List.h" />
     <ClInclude Include="include\Endure\Vector.h" />
   </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="src\Endure.cpp" />
-  </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{F3DB34CF-596E-41F6-B150-0D751CC87187}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>

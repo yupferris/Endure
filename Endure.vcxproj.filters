@@ -14,7 +14,4 @@
       <Filter>Endure</Filter>
     </ClInclude>
   </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="src\Endure.cpp" />
-  </ItemGroup>
 </Project>
