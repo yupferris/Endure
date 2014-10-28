@@ -111,7 +111,15 @@ namespace Endure
 			if (count == 1)
 				return std::shared_ptr<_Vector<T>>(new _Vector<T>());
 
-
+			if (count - TailOffset() > 1)
+			{
+				auto tailNode = (_Node<T> *)tail.get();
+				int tailCount = tailNode->Count - 1;
+				auto elements = new T[tailCount];
+				for (int i = 0; i < tailCount; i++)
+					elements[i] = tailNode->Elements[i];
+				return std::shared_ptr<_Vector<T>>(new _Vector(count - 1, shift, root, std::shared_ptr<void>(new _Node<T>(tailCount, elements))));
+			}
 		}
 
 		T Get(int i) const
