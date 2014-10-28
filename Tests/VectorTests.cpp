@@ -141,3 +141,15 @@ TEST_CASE("Assoc to empty int vector", "[Vector]")
 	REQUIRE(v->Count() == 1);
 	REQUIRE(v->Get(0) == 26);
 }
+
+TEST_CASE("Assoc int vector range checks", "[Vector]")
+{
+	auto v = CreateVector<int>();
+	for (int i = 0; i < 10; i++)
+		v = v->Conj(10000 + i);
+
+	REQUIRE_THROWS_AS(v->Assoc(-1, 1337), std::out_of_range);
+	REQUIRE_THROWS_AS(v->Assoc(11, 1337), std::out_of_range);
+	REQUIRE_THROWS_AS(v->Assoc(12, 1337), std::out_of_range);
+	REQUIRE_THROWS_AS(v->Assoc(1220, 1337), std::out_of_range);
+}
