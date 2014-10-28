@@ -94,7 +94,7 @@ TEST_CASE("Append 64 items to empty int vector", "[Vector]")
 		REQUIRE(v->Get(i) == i);
 }
 
-TEST_CASE("Append 5000 items to empty int vector", "[Vector]")
+TEST_CASE("Append 50000 items to empty int vector", "[Vector]")
 {
 	auto v = CreateVector<int>();
 	for (int i = 0; i < 50000; i++)
@@ -103,4 +103,32 @@ TEST_CASE("Append 5000 items to empty int vector", "[Vector]")
 	REQUIRE(v->Count() == 50000);
 	for (int i = 0; i < 50000; i++)
 		REQUIRE(v->Get(i) == i);
+}
+
+TEST_CASE("Change 50000 items in int vector", "[Vector]")
+{
+	auto v = CreateVector<int>();
+	for (int i = 0; i < 50000; i++)
+		v = Conj(v, i);
+
+	for (int i = 0; i < 50000; i++)
+		v = v->Assoc(i, 50000 - i);
+
+	REQUIRE(v->Count() == 50000);
+	for (int i = 0; i < 50000; i++)
+		REQUIRE(v->Get(i) == 50000 - i);
+}
+
+TEST_CASE("Change 16 items in small (tail-only) int vector", "[Vector]")
+{
+	auto v = CreateVector<int>();
+	for (int i = 0; i < 32; i++)
+		v = Conj(v, i);
+
+	for (int i = 0; i < 16; i++)
+		v = Assoc(v, i, 16 - i);
+
+	REQUIRE(v->Count() == 32);
+	for (int i = 0; i < 32; i++)
+		REQUIRE(v->Get(i) == (i < 16 ? 16 - i : i));
 }

@@ -81,6 +81,28 @@ namespace Endure
 			return std::shared_ptr<_Vector<T>>(new _Vector(count + 1, newShift, newRoot, std::shared_ptr<void>(new _Node<T>(1, newTailElements))));
 		}
 
+		std::shared_ptr<_Vector<T>> Assoc(int i, T value)
+		{
+			if (i < 0 || i > count)
+				throw std::out_of_range("Index was out of bounds");
+
+			if (i == count)
+				return Conj(value);
+
+			if (i >= TailOffset())
+			{
+				auto tailNode = (_Node<T> *)tail.get();
+				int tailCount = tailNode->Count;
+				auto elements = new T[tailCount];
+				for (int j = 0; j < tailCount; j++)
+					elements[j] = tailNode->Elements[j];
+				elements[i & 0x1f] = value;
+				return std::shared_ptr<_Vector<T>>(new _Vector(count, shift, root, std::shared_ptr<void>(new _Node<T>(tailCount, elements))));
+			}
+
+			return std::shared_ptr<_Vector<T>>(new _Vector(count, shift, AssocAux(shift, root, i, value), tail));
+		}
+
 		T Get(int i) const
 		{
 			auto node = ArrayFor(i);
@@ -150,6 +172,30 @@ namespace Endure
 			return std::shared_ptr<void>(ret);
 		}
 
+		static std::shared_ptr<void> AssocAux(int level, std::shared_ptr<void> node, int i, T value)
+		{
+			if (level == 0)
+			{
+				auto leafNode = (_Node<T> *)node.get();
+				int leafCount = leafNode->Count;
+				auto elements = new T[leafCount];
+				for (int j = 0; j < leafCount; j++)
+					elements[j] = leafNode->Elements[j];
+				elements[i & 0x1f] = value;
+				return std::shared_ptr<void>(new _Node<T>(leafCount, elements));
+			}
+
+			auto internalNode = (_Node<std::shared_ptr<void>> *)node.get();
+			int internalNodeCount = internalNode->Count;
+			auto elements = new std::shared_ptr<void>[internalNodeCount];
+			for (int j = 0; j < internalNodeCount; j++)
+				elements[j] = internalNode->Elements[j];
+			int localIndex = (i >> level) & 0x1f;
+			elements[localIndex] =
+				AssocAux(level - 5, elements[localIndex], i, value);
+			return std::shared_ptr<void>(new _Node<std::shared_ptr<void>>(internalNodeCount, elements));
+		}
+
 		const int count;
 		const int shift;
 		const std::shared_ptr<void> root;
@@ -166,6 +212,11 @@ namespace Endure
 	template <typename T> Vector<T> Conj(Vector<T> vector, T item)
 	{
 		return vector->Conj(item);
+	}
+
+	template <typename T> Vector<T> Assoc(Vector<T> vector, int i, T value)
+	{
+		return vector->Assoc(i, value);
 	}
 
 	template <typename T> T Get(Vector<T> vector, int key)
