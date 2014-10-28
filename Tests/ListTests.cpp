@@ -53,10 +53,10 @@ TEST_CASE("Cons to single element int list", "[List]")
 TEST_CASE("Simple int list cons stress test", "[List]")
 {
 	auto l = CreateList(0);
-	for (int i = 1; i < 10000; i++)
+	for (int i = 1; i < 100; i++)
 		l = Conj(l, i);
 
-	REQUIRE(l->Head() == 9999);
-	REQUIRE(l->Tail()->Count() == 9999);
-	REQUIRE(l->Count() == 10000);
+	REQUIRE(l->Head() == 99);
+	REQUIRE(l->Tail()->Count() == 99);
+	REQUIRE(l->Count() == 100);
 }
