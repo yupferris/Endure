@@ -195,3 +195,29 @@ TEST_CASE("Pop small int vector", "[Vector]")
 	for (int i = 0; i < 48; i++)
 		REQUIRE(v->Get(i) == i);
 }
+
+TEST_CASE("Pop 25000 items from 50000 item int vector", "[Vector]")
+{
+	auto v = CreateVector<int>();
+	for (int i = 0; i < 50000; i++)
+		v = Conj(v, i);
+
+	for (int i = 0; i < 25000; i++)
+		v = v->Pop();
+
+	REQUIRE(v->Count() == 25000);
+	for (int i = 0; i < 25000; i++)
+		REQUIRE(v->Get(i) == i);
+}
+
+TEST_CASE("Pop all items from 50000 item int vector", "[Vector]")
+{
+	auto v = CreateVector<int>();
+	for (int i = 0; i < 50000; i++)
+		v = Conj(v, i);
+
+	for (int i = 0; i < 50000; i++)
+		v = v->Pop();
+
+	REQUIRE(!v->Count());
+}

@@ -120,12 +120,25 @@ namespace Endure
 					elements[i] = tailNode->Elements[i];
 				return std::shared_ptr<_Vector<T>>(new _Vector(count - 1, shift, root, std::shared_ptr<void>(new _Node<T>(tailCount, elements))));
 			}
+
+			auto newTail = ArrayFor(count - 2);
+			auto newRoot = PopTail(shift, root);
+			int newShift = shift;
+			if (!newRoot.get())
+				newRoot = std::shared_ptr<void>(new _Node<std::shared_ptr<void>>(32));
+			auto newRootValue = (_Node<std::shared_ptr<void>> *)newRoot.get();
+			if (shift > 5 && !newRootValue->Elements[1])
+			{
+				newRoot = newRootValue->Elements[0];
+				newShift -= 5;
+			}
+			return std::shared_ptr<_Vector<T>>(new _Vector(count - 1, newShift, newRoot, newTail));
 		}
 
 		T Get(int i) const
 		{
-			auto node = ArrayFor(i);
-			return node[i & 0x1f];
+			auto node = (_Node<T> *)ArrayFor(i).get();
+			return node->Elements[i & 0x1f];
 		}
 
 	private:
@@ -134,18 +147,18 @@ namespace Endure
 		{
 		}
 
-		const T *ArrayFor(int i) const
+		std::shared_ptr<void> ArrayFor(int i) const
 		{
 			if (i < 0 || i >= count)
 				throw std::out_of_range("Index was out of bounds");
 
 			if (i >= TailOffset())
-				return ((_Node<T> *)tail.get())->Elements;
+				return tail;
 
-			auto node = root.get();
+			auto node = root;
 			for (int level = shift; level > 0; level -= 5)
-				node = ((_Node<std::shared_ptr<void>> *)node)->Elements[(i >> level) & 0x1f].get();
-			return ((_Node<T> *)node)->Elements;
+				node = ((_Node<std::shared_ptr<void>> *)node.get())->Elements[(i >> level) & 0x1f];
+			return node;
 		}
 
 		int TailOffset() const
@@ -212,6 +225,36 @@ namespace Endure
 			int localIndex = (i >> level) & 0x1f;
 			elements[localIndex] =
 				AssocAux(level - 5, elements[localIndex], i, value);
+			return std::shared_ptr<void>(new _Node<std::shared_ptr<void>>(internalNodeCount, elements));
+		}
+
+		std::shared_ptr<void> PopTail(int level, std::shared_ptr<void> node)
+		{
+			int localIndex = ((count - 2) >> level) & 0x1f;
+			if (level > 5)
+			{
+				auto newChild = PopTail(level - 5, ((_Node<std::shared_ptr<void>> *)node.get())->Elements[localIndex]);
+				if (!newChild.get() && localIndex == 0)
+					return std::shared_ptr<void>();
+
+				auto internalNode = (_Node<std::shared_ptr<void>> *)node.get();
+				int internalNodeCount = internalNode->Count;
+				auto elements = new std::shared_ptr<void>[internalNodeCount];
+				for (int i = 0; i < internalNodeCount; i++)
+					elements[i] = internalNode->Elements[i];
+				elements[localIndex] = newChild;
+				return std::shared_ptr<void>(new _Node<std::shared_ptr<void>>(internalNodeCount, elements));
+			}
+
+			if (localIndex == 0)
+				return std::shared_ptr<void>();
+
+			auto internalNode = (_Node<std::shared_ptr<void>> *)node.get();
+			int internalNodeCount = internalNode->Count;
+			auto elements = new std::shared_ptr<void>[internalNodeCount];
+			for (int i = 0; i < internalNodeCount; i++)
+				elements[i] = internalNode->Elements[i];
+			elements[localIndex] = nullptr;
 			return std::shared_ptr<void>(new _Node<std::shared_ptr<void>>(internalNodeCount, elements));
 		}
 
