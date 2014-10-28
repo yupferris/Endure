@@ -97,10 +97,10 @@ TEST_CASE("Append 64 items to empty int vector", "[Vector]")
 TEST_CASE("Append 5000 items to empty int vector", "[Vector]")
 {
 	auto v = CreateVector<int>();
-	for (int i = 0; i < 5000; i++)
+	for (int i = 0; i < 50000; i++)
 		v = v->Conj(i);
 
-	REQUIRE(v->Count() == 5000);
-	for (int i = 0; i < 5000; i++)
+	REQUIRE(v->Count() == 50000);
+	for (int i = 0; i < 50000; i++)
 		REQUIRE(v->Get(i) == i);
 }
