@@ -168,7 +168,7 @@ TEST_CASE("Pop single item int vector", "[Vector]")
 	REQUIRE(!v->Count());
 }
 
-TEST_CASE("Pop small int vector", "[Vector]")
+TEST_CASE("Pop small (tail-only) int vector", "[Vector]")
 {
 	auto v = CreateVector<int>();
 	for (int i = 0; i < 32; i++)
@@ -179,5 +179,19 @@ TEST_CASE("Pop small int vector", "[Vector]")
 
 	REQUIRE(v->Count() == 16);
 	for (int i = 0; i < 16; i++)
+		REQUIRE(v->Get(i) == i);
+}
+
+TEST_CASE("Pop small int vector", "[Vector]")
+{
+	auto v = CreateVector<int>();
+	for (int i = 0; i < 64; i++)
+		v = Conj(v, i);
+
+	for (int i = 0; i < 16; i++)
+		v = Pop(v);
+
+	REQUIRE(v->Count() == 48);
+	for (int i = 0; i < 48; i++)
 		REQUIRE(v->Get(i) == i);
 }
