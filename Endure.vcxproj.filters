@@ -6,12 +6,12 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="include\Endure.h" />
-    <ClInclude Include="include\Endure\List.h">
+    <ClInclude Include="include\Endure\List.hpp">
       <Filter>Endure</Filter>
     </ClInclude>
-    <ClInclude Include="include\Endure\Vector.h">
+    <ClInclude Include="include\Endure\Vector.hpp">
       <Filter>Endure</Filter>
     </ClInclude>
+    <ClInclude Include="include\Endure.hpp" />
   </ItemGroup>
 </Project>

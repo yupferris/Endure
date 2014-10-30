@@ -11,9 +11,9 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="include\Endure.h" />
-    <ClInclude Include="include\Endure\List.h" />
-    <ClInclude Include="include\Endure\Vector.h" />
+    <ClInclude Include="include\Endure.hpp" />
+    <ClInclude Include="include\Endure\List.hpp" />
+    <ClInclude Include="include\Endure\Vector.hpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{F3DB34CF-596E-41F6-B150-0D751CC87187}</ProjectGuid>

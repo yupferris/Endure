@@ -1,4 +1,4 @@
-#include <Endure.h>
+#include <Endure.hpp>
 #include "Catch/single_include/catch.hpp"
 
 using namespace Endure;
